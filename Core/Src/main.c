@@ -92,13 +92,22 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, SET);
-	  HAL_Delay(2000);
-	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, SET);
-	  HAL_Delay(2000);
-	  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, RESET);
-	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, RESET);
-	  HAL_Delay(2000);
+	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, SET);
+	HAL_Delay(5000);
+	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, RESET);
+	HAL_Delay(1000);
+
+	/* Disable all used wakeup sources: PWR_WAKEUP_PIN1 */
+	HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
+
+	/* Clear all related wakeup flags*/
+	__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+
+	/* Enable WakeUp Pin PWR_WAKEUP_PIN1 connected to PA.00 */
+	HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
+
+	/* Enter the Standby mode */
+	HAL_PWR_EnterSTANDBYMode();
 
     /* USER CODE END WHILE */
 
