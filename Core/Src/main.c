@@ -92,12 +92,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-	  HAL_Delay(100);
-	  HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-	  HAL_Delay(300);
-	  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-	  HAL_Delay(500);
+	  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, SET);
+	  HAL_Delay(2000);
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, SET);
+	  HAL_Delay(2000);
+	  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, RESET);
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, RESET);
+	  HAL_Delay(2000);
 
     /* USER CODE END WHILE */
 
