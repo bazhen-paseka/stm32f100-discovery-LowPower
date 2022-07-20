@@ -24,7 +24,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+	#include "stdio.h"
+	#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,7 +90,17 @@ int main(void)
   MX_CRC_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+	char DataChar[100];
+	sprintf(DataChar,"\r\n STM32 VL-Discovery\r\n" );
+	HAL_UART_Transmit( &huart1, (uint8_t *)DataChar , strlen(DataChar) , 100 ) ;
 
+	#define DATE_as_int_str 	(__DATE__)
+	#define TIME_as_int_str 	(__TIME__)
+	sprintf(DataChar,"\r\n\tBuild: %s. Time: %s." , DATE_as_int_str , TIME_as_int_str ) ;
+	HAL_UART_Transmit( &huart1, (uint8_t *)DataChar , strlen(DataChar) , 100 ) ;
+
+	sprintf(DataChar,"\r\n\tFor debug: UART1-115200/8-N-1" ) ;
+	HAL_UART_Transmit( &huart1, (uint8_t *)DataChar , strlen(DataChar) , 100 ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
